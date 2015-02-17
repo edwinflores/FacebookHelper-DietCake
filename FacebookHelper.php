@@ -28,17 +28,20 @@ class FacebookHelper
     /** @var  $redirect_url :: The redirect url Facebook goes to in redirection */
     private $redirect_url;
 
+    /** Set the app credentials given by Facebook**/
     public function setAppKeys($facebook_id, $facebook_secret)
     {
         $this->app_id_key = $facebook_id;
         $this->app_secret_key = $facebook_secret;
     }
 
+    /** Set the scopes to be requested from the user **/
     public function setScopes($scopes = array())
     {
         $this->scopes = $scopes;
     }
 
+    /** Set the redirec url to be used after the process**/
     public function setRedirectUrl($url)
     {
         $this->redirect_url = $url;
@@ -78,7 +81,7 @@ class FacebookHelper
     }
 
     /**
-     * @param array $data :: The list of data needed
+     * @param array $data :: The list of data needed, if none is provided returns all the data
      * @return array $user_data :: Returns an associative array with the user's data
      */
     public function GetUserData(array $data = null)
@@ -105,6 +108,11 @@ class FacebookHelper
         return $user_data;
     }
 
+    /**
+     * A helper method that gathers all of the data from the Facebook Graph Object
+     * @param $graphObject:: the Facebook Graph Object initialized and received from the authentication process
+     * @return $data:: an associatice array with the data names as the keys
+     */
     private function GetAllUserData($graphObject)
     {
         $keys = $graphObject->getPropertyNames();
